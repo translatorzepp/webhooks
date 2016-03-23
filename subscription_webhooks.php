@@ -19,18 +19,21 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
     $subject = 'Webhook Notification';
     $headers = 'From: zoe.palmer@braintreepayments.com' . "\r\n";
 
-    // if ($webhookNotification->kind == 'check') {
-    //     // $message = " " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . " Kind: " .  . " | url check successful\n";
+    $message = "Webhook received! " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "\nKind: " . $webhookNotification->kind;
+
+    if ($webhookNotification->kind == 'check') {
+        $message = $message . " | url check successful\n";
+    }
+    // elseif ($webhookNotification->kind == Braintree::) { // if kind == one of the sub webhooks
+    //     # code...
     // }
-    // else {
-    //     // $message = " " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . " Kind: " . $webhookNotification->kind . " | " . "Subscription: " . $webhookNotification->subscription->id . "\n";
-    // }
-    
-    $message = 'Webhook Received! ' . $webhookNotification->timestamp->format('Y-m-d H:i:s') . " Kind: " . $webhookNotification->kind;
+    else {
+        $message = $message . "\nSubscription: " . $webhookNotification->subscription->id;
+    }
 
     mail($to, $subject, $message, $headers);
 
-    file_put_contents("/var/www/html/webhooks/webhook.log", $message, FILE_APPEND);
+    file_put_contents("/var/www/html/webhooks/webhook.txt", $message, FILE_APPEND);
 }
 
 ?>
