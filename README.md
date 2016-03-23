@@ -1,2 +1,1 @@
-# subscription_webhooks
-Webhook response code
+Subscription webhook parsing and response code. Will send an email with webhook details, and [should] write webhook details to a log file on the server. [Currently that second part is not working.]
