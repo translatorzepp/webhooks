@@ -24,7 +24,7 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
     if ($webhookNotification->kind == 'check') {
         $message = $message . " | url check successful\n";
     }
-    // elseif ($webhookNotification->kind == Braintree::) { // if kind == one of the sub webhooks
+    // elseif ($webhookNotification->kind == one of the Braintree subscription webhooks) {
     //  code goes here
     // }
     else {
