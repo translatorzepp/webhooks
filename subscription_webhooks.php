@@ -2,12 +2,12 @@
 
 require_once "/var/www/braintree-php-3.9.0/lib/Braintree.php";
 
-date_default_timezone_set('America/Chicago');
-
 Braintree_Configuration::environment('sandbox');
 Braintree_Configuration::merchantId('ryqy4yyw7m5bf92h');
 Braintree_Configuration::publicKey('ymtqgy8773zq2fw3');
 Braintree_Configuration::privateKey('7dd7253c4c53d675f15e869212659579');
+
+date_default_timezone_set('America/Chicago');
 
 if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
   
@@ -25,7 +25,7 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
         $message = $message . " | url check successful\n";
     }
     // elseif ($webhookNotification->kind == Braintree::) { // if kind == one of the sub webhooks
-    //     # code...
+    //  code goes here
     // }
     else {
         $message = $message . "\nSubscription: " . $webhookNotification->subscription->id;
