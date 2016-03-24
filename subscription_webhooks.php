@@ -22,17 +22,16 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
     $message = "Webhook received! " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "\nKind: " . $webhookNotification->kind;
 
     if ($webhookNotification->kind == 'check') {
-        $message = $message . " | url check successful\n";
+        $message = $message . " | URL check successful\n";
     }
-    // elseif ($webhookNotification->kind == one of the Braintree subscription webhooks) {
-    //  code goes here
-    // }
     else {
         $message = $message . "\nSubscription: " . $webhookNotification->subscription->id;
     }
+    // Turn this into a case statement for the different possible webhook kinds
 
     mail($to, $subject, $message, $headers);
 
+    // This isn't working. Work on it.
     file_put_contents("/var/www/html/webhooks/webhook.txt", $message, FILE_APPEND);
 }
 
