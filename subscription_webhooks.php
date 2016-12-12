@@ -1,7 +1,7 @@
 <?php
 
 require "/var/www/html/autoload_braintree.php";
-$logpath = "/tmp/logs/webhook.log";
+$logpath = "/tmp/webhook.log";
 
 if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
   
@@ -13,19 +13,18 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
     $subject = 'Webhook Notification';
     $headers = 'From: zoe.palmer@braintreepayments.com' . "\r\n";
 
-    $message = "Webhook received! " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "\nKind: " . $webhookNotification->kind;
+    $message = "Webhook received! " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . " Kind: " . $webhookNotification->kind;
 
     if ($webhookNotification->kind == 'check') {
         $message = $message . " | URL check successful\n";
     }
     else {
-        $message = $message . "\nSubscription: " . $webhookNotification->subscription->id;
+        $message = $message . " | Subscription: " . $webhookNotification->subscription->id . "\n";
     }
     // Turn this into a case statement for the different possible webhook kinds
 
     mail($to, $subject, $message, $headers);
 
-    // This isn't working. Work on it.
     file_put_contents($logpath, $message, FILE_APPEND);
 
 }
