@@ -1,13 +1,6 @@
 <?php
 
-require_once "/var/www/braintree-php-3.9.0/lib/Braintree.php";
-
-Braintree_Configuration::environment('sandbox');
-Braintree_Configuration::merchantId('ryqy4yyw7m5bf92h');
-Braintree_Configuration::publicKey('ymtqgy8773zq2fw3');
-Braintree_Configuration::privateKey('7dd7253c4c53d675f15e869212659579');
-
-date_default_timezone_set('America/Chicago');
+require "/var/www/html/autoload_braintree.php";
 
 if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
   
@@ -33,6 +26,9 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
 
     // This isn't working. Work on it.
     file_put_contents("/var/www/html/webhooks/webhook.txt", $message, FILE_APPEND);
+}
+else {
+    echo "Webhook endpoint reached by not a webhook.";
 }
 
 ?>
