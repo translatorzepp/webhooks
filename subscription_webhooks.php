@@ -25,7 +25,7 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
     mail($to, $subject, $message, $headers);
 
     // This isn't working. Work on it.
-    file_put_contents("/var/www/html/webhooks/webhook.txt", $message, FILE_APPEND);
+    file_put_contents("/var/www/html/webhook.log", $message, FILE_APPEND);
 }
 else {
     echo "Webhook endpoint reached by not a webhook.";
