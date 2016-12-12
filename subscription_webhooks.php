@@ -1,6 +1,7 @@
 <?php
 
 require "/var/www/html/autoload_braintree.php";
+$logpath = "/tmp/logs/webhook.log";
 
 if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
   
@@ -25,12 +26,12 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
     mail($to, $subject, $message, $headers);
 
     // This isn't working. Work on it.
-    file_put_contents("/var/www/html/webhook.log", $message, FILE_APPEND);
+    file_put_contents($logpath, $message, FILE_APPEND);
 
 }
 else {
 
-    file_put_contents("/var/www/html/webhook.log", "Non-Braintree-webhook-post made to this endpoint.\n", FILE_APPEND);
+    file_put_contents($logpath, "Non-Braintree-webhook-post made to this endpoint.\n", FILE_APPEND);
     echo "Webhook endpoint reached by not a webhook.";
 
 }
