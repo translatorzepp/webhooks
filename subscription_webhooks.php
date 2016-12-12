@@ -26,9 +26,13 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
 
     // This isn't working. Work on it.
     file_put_contents("/var/www/html/webhook.log", $message, FILE_APPEND);
+
 }
 else {
+
+    file_put_contents("/var/www/html/webhook.log", "Non-Braintree-webhook-post made to this endpoint.\n", FILE_APPEND);
     echo "Webhook endpoint reached by not a webhook.";
+
 }
 
 ?>
