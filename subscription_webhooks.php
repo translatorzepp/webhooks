@@ -3,14 +3,14 @@
 require "/var/www/html/autoload_braintree.php";
 $logpath = "/tmp/webhook.log";
 
-// dump request to logs:
-$requestlogpath = "/tmp/requests.log";
-$request = var_export($_REQUEST, true);
-$request_log_message = "Dumping _REQUEST:\n" . $request . "\n";
-file_put_contents($requestlogpath, $request_log_message, FILE_APPEND);
-$server = var_export($_SERVER, true);
-$server_log_message = "Dumping _SERVER:\n" . $server . "\n";
-file_put_contents($requestlogpath, $server_log_message, FILE_APPEND);
+//// dump request to logs:
+//$requestlogpath = "/tmp/requests.log";
+//$request = var_export($_REQUEST, true);
+//$request_log_message = "Dumping _REQUEST:\n" . $request . "\n";
+//file_put_contents($requestlogpath, $request_log_message, FILE_APPEND);
+//$server = var_export($_SERVER, true);
+//$server_log_message = "Dumping _SERVER:\n" . $server . "\n";
+//file_put_contents($requestlogpath, $server_log_message, FILE_APPEND);
 
 if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
 
