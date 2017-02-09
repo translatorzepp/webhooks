@@ -4,7 +4,11 @@ require "/var/www/html/autoload_braintree.php";
 $logpath = "/tmp/webhook.log";
 
 if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
-  
+
+    // dump request to logs:
+    file_put_contents($logpath, var_dump($_REQUEST) . "\n", FILE_APPEND);
+    file_put_contents($logpath, var_dump($_POST) . "\n", FILE_APPEND);
+
     $webhookNotification = Braintree_WebhookNotification::parse(
         $_POST["bt_signature"], $_POST["bt_payload"]
     );
