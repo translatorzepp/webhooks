@@ -24,10 +24,10 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
 
     $message = "Webhook received! " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . " Kind: " . $webhookNotification->kind;
 
-    if ($webhookNotification->kind == 'check') {
+    if ($webhookNotification->kind == Braintree_WebhookNotification::CHECK) {
         $message = $message . " | URL check successful\n";
     }
-    elseif ($webhookNotification->kind == 'subscription') {
+    elseif (in_array($webhookNotification->kind, [Braintree_WebhookNotification::SUBSCRIPTION_CANCELED, Braintree_WebhookNotification::SUBSCRIPTION_CHARGED_SUCCESSFULLY, Braintree_WebhookNotification::SUBSCRIPTION_CHARGED_UNSUCCESSFULLY, Braintree_WebhookNotification::SUBSCRIPTION_EXPIRED, Braintree_WebhookNotification::SUBSCRIPTION_TRIAL_ENDED, Braintree_WebhookNotification::SUBSCRIPTION_WENT_ACTIVE, Braintree_WebhookNotification::SUBSCRIPTION_WENT_PAST_DUE])) {
         $message = $message . " | Subscription: " . $webhookNotification->subscription->id . "\n";
     }
     else {
