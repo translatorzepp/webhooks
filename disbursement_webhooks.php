@@ -34,18 +34,18 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
         $disburseSuccess = "";
         $transactionList = implode(", ", $disbursement->transactionIds);
         if ($disbursement->retry == True) {
-            $disburseIsARetry = "true"
+            $disburseIsARetry = "true";
         }
         else {
-            $disburseIsARetry = "false"
+            $disburseIsARetry = "false";
         }
         if ($disbursement->success == True) {
-            $disburseSuccess = "true"
+            $disburseSuccess = "true";
         }
         else {
-            $disburseSuccess = "false"
+            $disburseSuccess = "false";
         }
-        $message = $message . " | Disbursement: " . $disbursement->id . "\nDisbursement Date: " . $disburseDate . "\nAmount: " . $disbursement->amount . "\Merchant Account: " . $disbursement->merchantAccount . "\nRetry? ". $disburseIsARetry . "\nSuccessful? " . $disburseSuccess . "\nList of Transaction IDs: " . $transactionList . "\n";
+        $message = $message . " | Disbursement: " . $disbursement->id . "\nDisbursement Date: " . $disburseDate . "\nAmount: " . $disbursement->amount . "\Merchant Account ID: " . $disbursement->merchantAccount->id . "\nRetry? ". $disburseIsARetry . "\nSuccessful? " . $disburseSuccess . "\nList of Transaction IDs: " . $transactionList . "\n";
     }
     else {
         $message = $message . " | Unknown Type.\n";
