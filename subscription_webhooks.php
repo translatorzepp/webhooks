@@ -27,10 +27,12 @@ if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) {
     if ($webhookNotification->kind == 'check') {
         $message = $message . " | URL check successful\n";
     }
-    else {
+    elseif ($webhookNotification->kind == 'subscription') {
         $message = $message . " | Subscription: " . $webhookNotification->subscription->id . "\n";
     }
-    // Turn this into a case statement for the different possible webhook kinds
+    else {
+        $message = $message . " | Unknown Type.\n";
+    }
 
     mail($to, $subject, $message, $headers);
 
